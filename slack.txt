@@ -1,4 +1,4 @@
 https://devopschat.slack.com
 https://pythondev.slack.com
 https://opendatacommunity.slack.com
-
+https://cloud-native.slack.com
