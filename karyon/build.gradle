@@ -1,0 +1,70 @@
+repositories {
+    mavenCentral()
+}
+
+apply plugin: "java"
+
+dependencies {
+
+    compile group: 'com.netflix.karyon', name: 'karyon2-core', version: '2.8.3'
+    compile group: 'com.netflix.karyon', name: 'karyon2-admin-web', version: '2.8.3'
+    compile group: 'com.netflix.karyon', name: 'karyon2-admin-healthcheck-plugin', version: '2.8.3'
+    compile group: 'com.netflix.karyon', name: 'karyon2-jersey-blocking', version: '2.8.3'
+    compile group: 'com.netflix.karyon', name: 'karyon2-eureka', version: '2.8.3'
+    compile group: 'com.netflix.karyon', name: 'karyon2-archaius', version: '2.8.3'
+    
+    
+    compile group: 'com.netflix.hystrix', name: 'hystrix-core', version: '1.4.5'
+    compile group: 'com.netflix.hystrix', name: 'hystrix-metrics-event-stream', version: '1.4.5'
+	compile group: 'com.netflix.hystrix', name: 'hystrix-rx-netty-metrics-stream', version: '1.4.5'
+    compile group: 'com.netflix.karyon', name:  'karyon2-servo', version: '2.8.3'
+
+    compile "org.codehaus.jettison:jettison:1.2"
+    compile "org.slf4j:slf4j-api:1.7.0"
+    runtime "org.slf4j:slf4j-simple:1.7.0"
+    
+    testCompile 'junit:junit:4.12'
+    
+}
+
+
+subprojects {
+   task allDeps(type: DependencyReportTask) {}
+}
+    
+task allDeps << {
+    println "All Dependencies:"
+    allprojects.each { p ->
+        println()
+        println " $p.name ".center( 60, '*' )
+        println()
+        p.configurations.all.findAll { !it.allDependencies.empty }.each { c ->
+            println " ${c.name} ".center( 60, '-' )
+            c.allDependencies.each { dep ->
+                println "$dep.group:$dep.name:$dep.version"
+            }
+            println "-" * 60
+        }
+    }
+}
+
+
+sourceSets {
+    main.java.srcDirs "src/main/java", "src/main/resources" 
+}
+
+jar {	
+    manifest.attributes "Main-Class": "com.github.neoramon.App"
+}
+
+task runJersey(dependsOn: [classes], type: JavaExec) {
+
+    main = "netflix.karyon.KaryonRunner"
+    classpath = sourceSets.main.runtimeClasspath
+
+    jvmArgs "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'archaius.deployment.environment', 'dev'
+
+    args = ["com.github.neoramon.App"]
+}
