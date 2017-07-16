@@ -1,0 +1,1 @@
+docker exec -it $(docker ps | grep neoramon/rocketmq-name-server:4.1.0-incubating | awk '{print $1}') bash

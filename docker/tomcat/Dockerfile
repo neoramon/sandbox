@@ -27,5 +27,3 @@ RUN cat conf/tomcat-users.xml
 EXPOSE 8080
 
 CMD ["bin/catalina.sh", "run"]
-#CMD ["/bin/bash"]
-

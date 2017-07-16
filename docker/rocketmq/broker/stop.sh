@@ -1,0 +1,1 @@
+docker stop $(docker ps | grep neoramon/rocketmq-broker:4.1.0-incubating | awk '{print $1}')

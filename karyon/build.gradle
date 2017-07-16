@@ -17,8 +17,11 @@ dependencies {
     compile group: 'com.netflix.hystrix', name: 'hystrix-core', version: '1.4.5'
     compile group: 'com.netflix.hystrix', name: 'hystrix-metrics-event-stream', version: '1.4.5'
 	compile group: 'com.netflix.hystrix', name: 'hystrix-rx-netty-metrics-stream', version: '1.4.5'
-    compile group: 'com.netflix.karyon', name:  'karyon2-servo', version: '2.8.3'
 
+    compile group: 'com.netflix.hystrix', name: 'hystrix-codahale-metrics-publisher', version: '1.4.5'
+    compile group: 'io.dropwizard.metrics', name: 'metrics-core', version: '3.1.2'
+    compile group: 'com.netflix.karyon', name:  'karyon2-servo',  version: '2.8.3'
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.3'
     compile "org.codehaus.jettison:jettison:1.2"
     compile "org.slf4j:slf4j-api:1.7.0"
     runtime "org.slf4j:slf4j-simple:1.7.0"
