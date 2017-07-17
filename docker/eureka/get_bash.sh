@@ -1,0 +1,1 @@
+docker exec -it $(docker ps | grep neoramon/eureka:1.7.0 | awk '{print $1}') bash

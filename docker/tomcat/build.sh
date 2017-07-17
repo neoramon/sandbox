@@ -1,0 +1,1 @@
+docker build -t neoramon/tomcat:9 .

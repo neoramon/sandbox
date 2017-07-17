@@ -1,0 +1,1 @@
+docker build -t neoramon/eureka:1.7.0 .
