@@ -1,0 +1,1 @@
+docker build -t neoramon/rocketmq-console-ng:1 .

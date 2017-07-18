@@ -1,0 +1,1 @@
+docker build -t neoramon/rabbitmq:3.6.10 .

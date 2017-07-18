@@ -12,41 +12,45 @@ import org.apache.rocketmq.common.message.MessageExt;
 
 public class OrderedConsumer {
 
-	public static void main(final String[] args) throws Exception {
+    public static void main(final String[] args) throws Exception {
 
-		final DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("example_group_name");
+        final DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("defaultConsumerGroup");
 
-		consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
-		consumer.subscribe("TopicTest", "TagA || TagC || TagD");
+        consumer.subscribe("ramonBroker", "TagA || TagC || TagD");
 
-		consumer.registerMessageListener(new MessageListenerOrderly() {
+        consumer.subscribe("TestTopic", "*");
 
-			AtomicLong consumeTimes = new AtomicLong(0);
+        consumer.registerMessageListener(new MessageListenerOrderly() {
 
-			@Override
-			public ConsumeOrderlyStatus consumeMessage(final List<MessageExt> msgs,
-					final ConsumeOrderlyContext context) {
-				context.setAutoCommit(false);
-				System.out.printf(Thread.currentThread().getName() + " Receive New Messages: " + msgs + "%n");
-				this.consumeTimes.incrementAndGet();
-				if ((this.consumeTimes.get() % 2) == 0) {
-					return ConsumeOrderlyStatus.SUCCESS;
-				} else if ((this.consumeTimes.get() % 3) == 0) {
-					return ConsumeOrderlyStatus.ROLLBACK;
-				} else if ((this.consumeTimes.get() % 4) == 0) {
-					return ConsumeOrderlyStatus.COMMIT;
-				} else if ((this.consumeTimes.get() % 5) == 0) {
-					context.setSuspendCurrentQueueTimeMillis(3000);
-					return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
-				}
-				return ConsumeOrderlyStatus.SUCCESS;
+            AtomicLong consumeTimes = new AtomicLong(0);
 
-			}
-		});
+            @Override
+            public ConsumeOrderlyStatus consumeMessage(final List<MessageExt> msgs, final ConsumeOrderlyContext context) {
+                context.setAutoCommit(false);
+                for (final MessageExt msg : msgs) {
 
-		consumer.start();
+                }
+                System.out.printf(this.consumeTimes.get() + " - " + Thread.currentThread().getName() + " Receive New Messages: " + msgs + "%n");
+                this.consumeTimes.incrementAndGet();
+                //                if ((this.consumeTimes.get() % 2) == 0) {
+                //                    return ConsumeOrderlyStatus.SUCCESS;
+                //                } else if ((this.consumeTimes.get() % 3) == 0) {
+                //                    return ConsumeOrderlyStatus.ROLLBACK;
+                //                } else if ((this.consumeTimes.get() % 4) == 0) {
+                //                    return ConsumeOrderlyStatus.COMMIT;
+                //                } else if ((this.consumeTimes.get() % 5) == 0) {
+                //                    context.setSuspendCurrentQueueTimeMillis(3000);
+                //                    return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
+                //                }
+                return ConsumeOrderlyStatus.SUCCESS;
 
-		System.out.printf("Consumer Started.%n");
-	}
+            }
+        });
+
+        consumer.start();
+
+        System.out.printf("Consumer Started.%n");
+    }
 }

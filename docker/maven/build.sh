@@ -1,0 +1,1 @@
+docker build -t neoramon/maven:3.5.0 .

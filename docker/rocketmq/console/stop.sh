@@ -1,0 +1,1 @@
+docker stop $(docker ps | grep neoramon/rocketmq-console-ng:1 | awk '{print $1}')
