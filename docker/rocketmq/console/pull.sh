@@ -1,1 +1,0 @@
-docker pull styletang/rocketmq-console-ng
