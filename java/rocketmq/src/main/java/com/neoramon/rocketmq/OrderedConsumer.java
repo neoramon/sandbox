@@ -18,9 +18,10 @@ public class OrderedConsumer {
 
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
 
-        consumer.subscribe("ramonBroker", "TagA || TagC || TagD");
+        consumer.subscribe("ramonBroker", "TagA");
+        //        consumer.subscribe("ramonBroker", "TagA || TagC || TagD");
 
-        consumer.subscribe("TestTopic", "*");
+        //        consumer.subscribe("ramonBroker", "*");
 
         consumer.registerMessageListener(new MessageListenerOrderly() {
 
@@ -28,9 +29,9 @@ public class OrderedConsumer {
 
             @Override
             public ConsumeOrderlyStatus consumeMessage(final List<MessageExt> msgs, final ConsumeOrderlyContext context) {
-                context.setAutoCommit(false);
+                context.setAutoCommit(true);
                 for (final MessageExt msg : msgs) {
-
+                    System.out.println(new String(msg.getBody()));
                 }
                 System.out.printf(this.consumeTimes.get() + " - " + Thread.currentThread().getName() + " Receive New Messages: " + msgs + "%n");
                 this.consumeTimes.incrementAndGet();

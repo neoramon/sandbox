@@ -15,7 +15,7 @@ public class SyncProducer {
         final DefaultMQProducer producer = new DefaultMQProducer("defaultGroup");
         // Launch the instance.
         producer.start();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1_000_000; i++) {
             // Create a message instance, specifying topic, tag and message body.
             final Message msg = new Message("ramonBroker" /* Topic */, "TagA" /* Tag */,
                     ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
@@ -23,6 +23,7 @@ public class SyncProducer {
             // Call send message to deliver message to one of brokers.
             final SendResult sendResult = producer.send(msg);
             System.out.printf("%s%n", sendResult);
+            Thread.sleep(500L);
         }
         // Shut down once the producer instance is not longer in use.
         producer.shutdown();
