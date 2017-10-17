@@ -1,0 +1,1 @@
+docker exec -it $(docker ps | grep neoramon/redis:3.2.11 | awk '{print $1}') bash

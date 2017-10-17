@@ -1,0 +1,1 @@
+docker build -t neoramon/redis:3.2.11 .
