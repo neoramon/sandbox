@@ -1,0 +1,1 @@
+docker stop $(docker ps | grep neoramon/java:1.8 | awk '{print $1}')

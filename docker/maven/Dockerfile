@@ -1,4 +1,4 @@
-FROM neoramon/java:8
+FROM neoramon/java:1.8
 
 ARG MAVEN_VERSION=3.5.0
 ARG USER_HOME_DIR="/root"
