@@ -1,0 +1,1 @@
+docker push neoramon/java:1.8
