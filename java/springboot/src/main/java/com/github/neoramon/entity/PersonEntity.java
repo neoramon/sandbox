@@ -56,9 +56,4 @@ public class PersonEntity implements Serializable {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "ProductEntity [id=" + id + ", name=" + name + ", email=" + email + "]";
-    }
-
 }
