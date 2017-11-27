@@ -1,4 +1,4 @@
-FROM neoramon/java:8
+FROM neoramon/java:1.8
 
 # Rocketmq version
 ENV ROCKETMQ_VERSION 4.1.0-incubating
@@ -14,7 +14,7 @@ RUN mkdir -p \
 		/opt/logs \
 	    /opt/store
 
-RUN curl https://dist.apache.org/repos/dist/release/incubator/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip
+RUN curl https://dist.apache.org/repos/dist/release/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o rocketmq.zip
 RUN unzip rocketmq.zip
 RUN mv rocketmq-all-$ROCKETMQ_VERSION/* .
 RUN rmdir rocketmq-all-$ROCKETMQ_VERSION

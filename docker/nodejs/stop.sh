@@ -1,0 +1,1 @@
+docker stop $(docker ps | grep neoramon/nodejs:6 | awk '{print $1}')

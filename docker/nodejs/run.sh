@@ -1,0 +1,1 @@
+docker run -it --rm --name npm neoramon/nodejs:6 /bin/bash
