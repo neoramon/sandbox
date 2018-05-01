@@ -1,0 +1,1 @@
+docker stop $(docker ps | grep neoramon/wso2-apim | awk '{print $1}')

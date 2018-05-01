@@ -1,0 +1,1 @@
+docker exec -it $(docker ps | grep neoramon/wso2-apim | awk '{print $1}') bash

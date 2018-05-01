@@ -1,0 +1,1 @@
+docker build -t neoramon/wso2-apim:2.2.0 .
