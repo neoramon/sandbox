@@ -1,1 +1,0 @@
-docker push neoramon/ubuntu:16.04

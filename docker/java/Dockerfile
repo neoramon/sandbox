@@ -1,4 +1,5 @@
-from neoramon/ubuntu:16.04
+ARG IMG_FROM
+FROM $IMG_FROM
 
 # Install Java.
 RUN \

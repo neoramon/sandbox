@@ -1,1 +1,0 @@
-docker build -t neoramon/cassandra:2.1.19 .

@@ -1,1 +1,0 @@
-docker run -it --rm --name java neoramon/java:1.8 /bin/bash

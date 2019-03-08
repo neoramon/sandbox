@@ -1,1 +1,0 @@
-docker stop $(docker ps | grep neoramon/eureka | awk '{print $1}')

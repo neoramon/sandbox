@@ -1,4 +1,5 @@
-FROM neoramon/java:1.8
+ARG IMG_FROM
+FROM $IMG_FROM
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
@@ -6,7 +7,7 @@ RUN mkdir -p "$CATALINA_HOME"
 WORKDIR $CATALINA_HOME
 
 ENV TOMCAT_MAJOR 9
-ENV TOMCAT_VERSION 9.0.1
+ENV TOMCAT_VERSION 9.0.8
 
 
 ENV TOMCAT_TGZ_URL https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
